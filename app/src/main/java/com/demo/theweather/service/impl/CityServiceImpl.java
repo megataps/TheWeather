@@ -1,10 +1,10 @@
 package com.demo.theweather.service.impl;
 
-import com.demo.network.HttpResponse;
 import com.demo.theweather.data.CityRepository;
 import com.demo.theweather.model.City;
 import com.demo.theweather.service.CityService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +13,17 @@ import java.util.List;
 public class CityServiceImpl implements CityService {
 
     private CityRepository mCityRepository;
+    private List<City> mCityListCached;
 
     public CityServiceImpl(CityRepository cityRepository) {
         mCityRepository = cityRepository;
+
+        mCityListCached = new ArrayList<>();
     }
 
     @Override
     public List<City> getCityList(String name) throws Exception {
-        HttpResponse baseResponse = mCityRepository.getCityList(name);
-        return null;
+        mCityListCached = mCityRepository.getCityList(name);
+        return mCityListCached;
     }
 }

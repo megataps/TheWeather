@@ -1,6 +1,7 @@
 package com.demo.theweather.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.util.Log;
 import com.demo.theweather.R;
 import com.demo.theweather.loader.SearchCityLoader;
 import com.demo.theweather.model.City;
+import com.demo.theweather.ui.fragment.WeatherFragment;
 
 import java.util.List;
 
@@ -20,7 +22,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadCityList("HaNoi");
+        if (savedInstanceState == null) {
+//            Fragment fragment = CityListFragment.newInstance();
+            Fragment fragment = WeatherFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
+        }
+
+        //        loadCityList("HaNoi");
     }
 
     private void loadCityList(final String cityName) {
