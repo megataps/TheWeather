@@ -45,26 +45,8 @@ public class WeatherFragment extends BaseFragment {
     }
 
     private void initUiView(View view) {
-
         mWeatherViewPager = (ViewPager) view.findViewById(R.id.weather_view_pager);
-
-        mWeatherViewPager.setOffscreenPageLimit(1);
-        mWeatherViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        mWeatherViewPager.setOffscreenPageLimit(2);
     }
 
     private void loadData() {

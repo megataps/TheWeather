@@ -47,8 +47,11 @@ public class WeatherOfCityFragment extends BaseFragment {
     private TextView mTxtWind;
     private TextView mTxtFeelsLike;
 
+    private View mErrorLayout;
+
     private int mLoaderId;
     private City mCity;
+    private WeatherWrapper mWeatherWrapper;
 
     public static WeatherOfCityFragment newInstance(City city, int loaderId) {
         WeatherOfCityFragment fragment = new WeatherOfCityFragment();
@@ -80,6 +83,9 @@ public class WeatherOfCityFragment extends BaseFragment {
     private void initUiView(View view) {
         mViewSwitcher = (ViewSwitcher) view.findViewById(R.id.view_switcher);
 
+        mErrorLayout = view.findViewById(R.id.error_layout);
+        mErrorLayout.setVisibility(View.GONE);
+
         mTxtCityName = (TextView)view.findViewById(R.id.txtCityName);
         mTxtTemperature = (TextView)view.findViewById(R.id.txtTemperature);
         mTxtDescription = (TextView)view.findViewById(R.id.txtDescription);
@@ -97,7 +103,12 @@ public class WeatherOfCityFragment extends BaseFragment {
     public void loadData() {
 
         if(!NetworkUtils.isNetworkAvailable(getActivity())) {
-            ((BaseActivity) getActivity()).showAlertDialog(getString(R.string.common_error), getString(R.string.common_network_error));
+//            ((BaseActivity) getActivity()).showAlertDialog(getString(R.string.common_error), getString(R.string.common_network_error));
+
+            if(mWeatherWrapper == null) {
+                mErrorLayout.setVisibility(View.VISIBLE);
+            }
+
             return;
         }
 
@@ -139,10 +150,15 @@ public class WeatherOfCityFragment extends BaseFragment {
 
                 final Exception exception = ((ExceptionAwareLoader) loader).getException();
                 if (exception != null) {
+
+                    mErrorLayout.setVisibility(View.VISIBLE);
                     ((BaseActivity)getActivity()).showAlertDialog(getString(R.string.common_error),
                             exception.getMessage());
                     return;
                 }
+
+                mErrorLayout.setVisibility(View.GONE);
+                mWeatherWrapper = weatherWrapper;
 
                 mTxtCityName.setText(weatherWrapper.getRequest().getQuery());
 

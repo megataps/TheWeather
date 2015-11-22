@@ -22,7 +22,6 @@
             android:paddingLeft="@dimen/spacing_tiny"
             android:paddingRight="@dimen/spacing_tiny"
             android:gravity="center_horizontal"
-            android:text=""
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_larger"
             android:textStyle="bold"/>
@@ -35,7 +34,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginRight="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_small"
-            android:text="19°C"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_temperature"/>
 
@@ -83,7 +81,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Humidity"
+                    android:text="@string/humidity"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_normal"
                     android:textStyle="bold"/>
@@ -92,7 +90,6 @@
                     android:id="@+id/txtHumidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14%"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_small"/>
             </LinearLayout>
@@ -107,7 +104,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wind"
+                    android:text="@string/wind"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_normal"
                     android:textStyle="bold"/>
@@ -116,7 +113,7 @@
                     android:id="@+id/txtWind"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5 k/h"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_small"/>
             </LinearLayout>
@@ -131,7 +128,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Feels like"
+                    android:text="@string/feels_like"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_normal"
                     android:textStyle="bold"/>
@@ -140,7 +137,6 @@
                     android:id="@+id/txtFeelsLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14%"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_small"/>
             </LinearLayout>
@@ -159,7 +155,9 @@
             android:scrollbars="none"
             android:smoothScrollbar="true"/>
 
+        <include layout="@layout/view_loading_error" />
     </RelativeLayout>
 
     <include layout="@layout/fragment_loading_dialog" />
+
 </ViewSwitcher>
