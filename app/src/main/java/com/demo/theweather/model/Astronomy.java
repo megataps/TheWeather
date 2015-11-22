@@ -3,47 +3,45 @@ package com.demo.theweather.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/21/15.
  */
 public class Astronomy implements Parcelable {
 
-    private Date mSunrise;
-    private Date mSunset;
-    private Date mMoonrise;
-    private Date mMoonset;
+    private String mSunrise;
+    private String mSunset;
+    private String mMoonrise;
+    private String mMoonset;
 
-    public Date getSunrise() {
+    public String getSunrise() {
         return mSunrise;
     }
 
-    public void setSunrise(Date sunrise) {
+    public void setSunrise(String sunrise) {
         mSunrise = sunrise;
     }
 
-    public Date getSunset() {
+    public String getSunset() {
         return mSunset;
     }
 
-    public void setSunset(Date sunset) {
+    public void setSunset(String sunset) {
         mSunset = sunset;
     }
 
-    public Date getMoonrise() {
+    public String getMoonrise() {
         return mMoonrise;
     }
 
-    public void setMoonrise(Date moonrise) {
+    public void setMoonrise(String moonrise) {
         mMoonrise = moonrise;
     }
 
-    public Date getMoonset() {
+    public String getMoonset() {
         return mMoonset;
     }
 
-    public void setMoonset(Date moonset) {
+    public void setMoonset(String moonset) {
         mMoonset = moonset;
     }
 
@@ -54,27 +52,23 @@ public class Astronomy implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(mSunrise != null ? mSunrise.getTime() : -1);
-        dest.writeLong(mSunset != null ? mSunset.getTime() : -1);
-        dest.writeLong(mMoonrise != null ? mMoonrise.getTime() : -1);
-        dest.writeLong(mMoonset != null ? mMoonset.getTime() : -1);
+        dest.writeString(this.mSunrise);
+        dest.writeString(this.mSunset);
+        dest.writeString(this.mMoonrise);
+        dest.writeString(this.mMoonset);
     }
 
     public Astronomy() {
     }
 
     protected Astronomy(Parcel in) {
-        long tmpMSunrise = in.readLong();
-        this.mSunrise = tmpMSunrise == -1 ? null : new Date(tmpMSunrise);
-        long tmpMSunset = in.readLong();
-        this.mSunset = tmpMSunset == -1 ? null : new Date(tmpMSunset);
-        long tmpMMoonrise = in.readLong();
-        this.mMoonrise = tmpMMoonrise == -1 ? null : new Date(tmpMMoonrise);
-        long tmpMMoonset = in.readLong();
-        this.mMoonset = tmpMMoonset == -1 ? null : new Date(tmpMMoonset);
+        this.mSunrise = in.readString();
+        this.mSunset = in.readString();
+        this.mMoonrise = in.readString();
+        this.mMoonset = in.readString();
     }
 
-    public static final Parcelable.Creator<Astronomy> CREATOR = new Parcelable.Creator<Astronomy>() {
+    public static final Creator<Astronomy> CREATOR = new Creator<Astronomy>() {
         public Astronomy createFromParcel(Parcel source) {
             return new Astronomy(source);
         }

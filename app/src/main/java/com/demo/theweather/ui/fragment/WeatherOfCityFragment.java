@@ -3,12 +3,13 @@ package com.demo.theweather.ui.fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.demo.common.network.ImageLoader;
 import com.demo.theweather.R;
@@ -16,15 +17,15 @@ import com.demo.theweather.exception.ExceptionAwareLoader;
 import com.demo.theweather.loader.WeatherLoader;
 import com.demo.theweather.model.City;
 import com.demo.theweather.model.CurrentCondition;
+import com.demo.theweather.model.Weather;
 import com.demo.theweather.model.WeatherWrapper;
 import com.demo.theweather.service.request.WeatherParams;
 import com.demo.theweather.ui.activity.BaseActivity;
-import com.demo.theweather.util.LogUtils;
+import com.demo.theweather.ui.adapter.WeatherOfDateAdapter;
 import com.demo.theweather.util.NetworkUtils;
 import com.demo.theweather.util.TemperatureUtils;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/17/15.
@@ -33,6 +34,10 @@ public class WeatherOfCityFragment extends BaseFragment {
 
     private static final String TAG = WeatherOfCityFragment.class.getName();
     private static final String ARG_CITY = "ARG_CITY";
+    private static final String ARG_LOADER_ID = "ARG_LOADER_ID";
+
+    private ListView mWeahterOfDateListView;
+    private WeatherOfDateAdapter mWeatherOfDateAdapter;
 
     private TextView mTxtCityName;
     private TextView mTxtTemperature;
@@ -42,14 +47,14 @@ public class WeatherOfCityFragment extends BaseFragment {
     private TextView mTxtWind;
     private TextView mTxtFeelsLike;
 
-
+    private int mLoaderId;
     private City mCity;
 
-    public static WeatherOfCityFragment newInstance(City city) {
-        LogUtils.e(TAG, "newInstance");
+    public static WeatherOfCityFragment newInstance(City city, int loaderId) {
         WeatherOfCityFragment fragment = new WeatherOfCityFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_CITY, city);
+        args.putInt(ARG_LOADER_ID, loaderId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,6 +68,7 @@ public class WeatherOfCityFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_weather_of_city, container, false);
 
         mCity = getArguments().getParcelable(ARG_CITY);
+        mLoaderId = getArguments().getInt(ARG_LOADER_ID);
 
         initUiView(view);
 
@@ -72,6 +78,8 @@ public class WeatherOfCityFragment extends BaseFragment {
     }
 
     private void initUiView(View view) {
+        mViewSwitcher = (ViewSwitcher) view.findViewById(R.id.view_switcher);
+
         mTxtCityName = (TextView)view.findViewById(R.id.txtCityName);
         mTxtTemperature = (TextView)view.findViewById(R.id.txtTemperature);
         mTxtDescription = (TextView)view.findViewById(R.id.txtDescription);
@@ -80,9 +88,13 @@ public class WeatherOfCityFragment extends BaseFragment {
         mTxtFeelsLike = (TextView)view.findViewById(R.id.txtFeelsLike);
 
         mImgWeatherIcon = (ImageView)view.findViewById(R.id.imgWeatherIcon);
+
+        mWeahterOfDateListView = (ListView) view.findViewById(R.id.weather_of_date_list_view);
+        mWeatherOfDateAdapter = new WeatherOfDateAdapter();
+        mWeahterOfDateListView.setAdapter(mWeatherOfDateAdapter);
     }
 
-    private void loadData() {
+    public void loadData() {
 
         if(!NetworkUtils.isNetworkAvailable(getActivity())) {
             ((BaseActivity) getActivity()).showAlertDialog(getString(R.string.common_error), getString(R.string.common_network_error));
@@ -104,30 +116,26 @@ public class WeatherOfCityFragment extends BaseFragment {
                 mImgWeatherIcon);
     }
 
+    private void updateWeatherOfDate(List<Weather> weathers) {
+        mWeatherOfDateAdapter.setWeathers(weathers);
+        mWeatherOfDateAdapter.notifyDataSetChanged();
+    }
+
     private void loadWeatherOfCity(final String cityName) {
-        Log.e(TAG, "loadWeatherOfCity");
-        LogUtils.e(TAG, "cityName:" + cityName);
 
         final WeatherParams params = new WeatherParams(cityName);
 
-        Random random = new Random();
-        final int loaderId = random.nextInt(1000);
-        LogUtils.e(TAG, "loaderId:" + loaderId);
-
         LoaderManager.enableDebugLogging(true);
-        getSupportLoaderManager().initLoader(loaderId, null, new LoaderManager.LoaderCallbacks<WeatherWrapper>() {
+        getSupportLoaderManager().initLoader(mLoaderId, null, new LoaderManager.LoaderCallbacks<WeatherWrapper>() {
             @Override
             public Loader<WeatherWrapper> onCreateLoader(final int id, final Bundle args) {
-//                showProgressDialog(true);
-                LogUtils.e(TAG, "aaaaaaa");
+                showProgressbar(true);
                 return new WeatherLoader(getActivity(), params);
             }
 
             @Override
             public void onLoadFinished(final Loader<WeatherWrapper> loader, final WeatherWrapper weatherWrapper) {
-//                showProgressDialog(false);
-
-                LogUtils.e(TAG, "return cityName:" + cityName);
+                showProgressbar(false);
 
                 final Exception exception = ((ExceptionAwareLoader) loader).getException();
                 if (exception != null) {
@@ -143,7 +151,9 @@ public class WeatherOfCityFragment extends BaseFragment {
                     updateUi(currentConditions.get(0));
                 }
 
-                getSupportLoaderManager().destroyLoader(loaderId);
+                updateWeatherOfDate(weatherWrapper.getWeathers());
+
+//                getSupportLoaderManager().destroyLoader(loaderId);
             }
 
             @Override

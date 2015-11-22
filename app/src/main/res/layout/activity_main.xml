@@ -41,18 +41,17 @@
                 android:textSize="@dimen/font_larger"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/txtUpdate"
+            <ImageView
+                android:id="@+id/imgUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:text="Update"
-                android:paddingLeft="@dimen/spacing_small"
-                android:paddingRight="@dimen/spacing_small"
-                android:layout_alignParentRight="true"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"/>
+                android:background="@null"
+                android:src="@drawable/ic_update"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

@@ -10,17 +10,10 @@ public class Weather implements Parcelable {
 
     private Astronomy mAstronomy;
     private String mDate;
-    private String mTempMaxC;
-    private String mTempMaxF;
-    private String mTempMinC;
-    private String mTempMinF;
-    private String mWindspeedMiles;
-    private String mWindspeedKmph;
-    private String mWinddirection;
-    private String mWeatherCode;
-    private String mWeatherIconUrl;
-    private String mWeatherDesc;
-    private String mPrecipMM;
+    private double mTempMaxC;
+    private double mTempMaxF;
+    private double mTempMinC;
+    private double mTempMinF;
 
     public Astronomy getAstronomy() {
         return mAstronomy;
@@ -38,95 +31,36 @@ public class Weather implements Parcelable {
         mDate = date;
     }
 
-    public String getTempMaxC() {
+    public double getTempMaxC() {
         return mTempMaxC;
     }
 
-    public void setTempMaxC(String tempMaxC) {
+    public void setTempMaxC(double tempMaxC) {
         mTempMaxC = tempMaxC;
     }
 
-    public String getTempMaxF() {
+    public double getTempMaxF() {
         return mTempMaxF;
     }
 
-    public void setTempMaxF(String tempMaxF) {
+    public void setTempMaxF(double tempMaxF) {
         mTempMaxF = tempMaxF;
     }
 
-    public String getTempMinC() {
+    public double getTempMinC() {
         return mTempMinC;
     }
 
-    public void setTempMinC(String tempMinC) {
+    public void setTempMinC(double tempMinC) {
         mTempMinC = tempMinC;
     }
 
-    public String getTempMinF() {
+    public double getTempMinF() {
         return mTempMinF;
     }
 
-    public void setTempMinF(String tempMinF) {
+    public void setTempMinF(double tempMinF) {
         mTempMinF = tempMinF;
-    }
-
-    public String getWindspeedMiles() {
-        return mWindspeedMiles;
-    }
-
-    public void setWindspeedMiles(String windspeedMiles) {
-        mWindspeedMiles = windspeedMiles;
-    }
-
-    public String getWindspeedKmph() {
-        return mWindspeedKmph;
-    }
-
-    public void setWindspeedKmph(String windspeedKmph) {
-        mWindspeedKmph = windspeedKmph;
-    }
-
-    public String getWinddirection() {
-        return mWinddirection;
-    }
-
-    public void setWinddirection(String winddirection) {
-        mWinddirection = winddirection;
-    }
-
-    public String getWeatherCode() {
-        return mWeatherCode;
-    }
-
-    public void setWeatherCode(String weatherCode) {
-        mWeatherCode = weatherCode;
-    }
-
-    public String getWeatherIconUrl() {
-        return mWeatherIconUrl;
-    }
-
-    public void setWeatherIconUrl(String weatherIconUrl) {
-        mWeatherIconUrl = weatherIconUrl;
-    }
-
-    public String getWeatherDesc() {
-        return mWeatherDesc;
-    }
-
-    public void setWeatherDesc(String weatherDesc) {
-        mWeatherDesc = weatherDesc;
-    }
-
-    public String getPrecipMM() {
-        return mPrecipMM;
-    }
-
-    public void setPrecipMM(String precipMM) {
-        mPrecipMM = precipMM;
-    }
-
-    public Weather() {
     }
 
     @Override
@@ -138,33 +72,22 @@ public class Weather implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(this.mAstronomy, 0);
         dest.writeString(this.mDate);
-        dest.writeString(this.mTempMaxC);
-        dest.writeString(this.mTempMaxF);
-        dest.writeString(this.mTempMinC);
-        dest.writeString(this.mTempMinF);
-        dest.writeString(this.mWindspeedMiles);
-        dest.writeString(this.mWindspeedKmph);
-        dest.writeString(this.mWinddirection);
-        dest.writeString(this.mWeatherCode);
-        dest.writeString(this.mWeatherIconUrl);
-        dest.writeString(this.mWeatherDesc);
-        dest.writeString(this.mPrecipMM);
+        dest.writeDouble(this.mTempMaxC);
+        dest.writeDouble(this.mTempMaxF);
+        dest.writeDouble(this.mTempMinC);
+        dest.writeDouble(this.mTempMinF);
+    }
+
+    public Weather() {
     }
 
     protected Weather(Parcel in) {
         this.mAstronomy = in.readParcelable(Astronomy.class.getClassLoader());
         this.mDate = in.readString();
-        this.mTempMaxC = in.readString();
-        this.mTempMaxF = in.readString();
-        this.mTempMinC = in.readString();
-        this.mTempMinF = in.readString();
-        this.mWindspeedMiles = in.readString();
-        this.mWindspeedKmph = in.readString();
-        this.mWinddirection = in.readString();
-        this.mWeatherCode = in.readString();
-        this.mWeatherIconUrl = in.readString();
-        this.mWeatherDesc = in.readString();
-        this.mPrecipMM = in.readString();
+        this.mTempMaxC = in.readDouble();
+        this.mTempMaxF = in.readDouble();
+        this.mTempMinC = in.readDouble();
+        this.mTempMinF = in.readDouble();
     }
 
     public static final Creator<Weather> CREATOR = new Creator<Weather>() {

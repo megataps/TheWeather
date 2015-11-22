@@ -51,8 +51,8 @@ public class CityAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_city, viewGroup, false);
 
-            holder.mName = (TextView) convertView.findViewById(R.id.name_text_view);
-            holder.mCheckBoxButton = (ImageButton) convertView.findViewById(R.id.checkbox_button);
+            holder.mName = (TextView) convertView.findViewById(R.id.txtName);
+            holder.mCheckBoxButton = (ImageButton) convertView.findViewById(R.id.btnCheckbox);
 
             holder.mCheckBoxButton.setOnClickListener(new View.OnClickListener() {
                 @Override

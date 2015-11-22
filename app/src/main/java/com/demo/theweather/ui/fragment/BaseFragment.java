@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.widget.ViewSwitcher;
 
 import com.demo.theweather.ui.activity.BaseActivity;
 
@@ -13,8 +14,12 @@ import com.demo.theweather.ui.activity.BaseActivity;
  */
 public class BaseFragment extends Fragment {
 
+    protected static final int INDEX_CONTENT = 0;
+    protected static final int INDEX_PROGRESS = 1;
+
     protected Activity mActivity;
     protected Handler mHandler = new Handler();
+    protected ViewSwitcher mViewSwitcher;
 
     @Override
     public void onAttach(Context context) {
@@ -48,5 +53,16 @@ public class BaseFragment extends Fragment {
 
     public void showProgressDialog(final boolean isShow) {
         ((BaseActivity)mActivity).showProgressDialog(isShow);
+    }
+
+    /**
+     * show progress inside view with view switcher
+     *
+     * @param isShow true : show, false : hide
+     */
+    public void showProgressbar(final boolean isShow) {
+        if (mViewSwitcher != null) {
+            mViewSwitcher.setDisplayedChild(isShow ? INDEX_PROGRESS : INDEX_CONTENT);
+        }
     }
 }

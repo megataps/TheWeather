@@ -42,10 +42,15 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
             HttpResponse httpResponse = mDefaultHttpClient.get(url, null);
 
-            mWeatherWrapperParser.parse(httpResponse.getBody());
-            BaseResponse<WeatherWrapper> baseResponse = mWeatherWrapperParser.getResult();
+//            if(httpResponse != null && httpResponse.getStatus() >= 200 && httpResponse.getStatus() < 300) {
 
-            return baseResponse.getData();
+                mWeatherWrapperParser.parse(httpResponse.getBody());
+                BaseResponse<WeatherWrapper> baseResponse = mWeatherWrapperParser.getResult();
+
+                return baseResponse.getData();
+//            } else {
+//                throw new TWException(mDefaultHttpClient.getErrorMessage());
+//            }
         } catch (MalformedURLException ex) {
             throw new TWException(ex.getMessage());
         } catch (JSONException ex) {

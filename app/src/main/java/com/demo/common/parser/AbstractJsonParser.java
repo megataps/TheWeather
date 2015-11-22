@@ -59,5 +59,4 @@ public abstract class AbstractJsonParser<T> implements Parser<T> {
 
         return 0;
     }
-
 }

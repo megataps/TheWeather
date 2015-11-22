@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import com.demo.theweather.R;
 import com.demo.theweather.TWApplication;
 import com.demo.theweather.model.City;
+import com.demo.theweather.ui.activity.BaseActivity;
 import com.demo.theweather.util.LogUtils;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/18/15.
@@ -46,7 +48,7 @@ public class WeatherFragment extends BaseFragment {
 
         mWeatherViewPager = (ViewPager) view.findViewById(R.id.weather_view_pager);
 
-        mWeatherViewPager.setOffscreenPageLimit(3);
+        mWeatherViewPager.setOffscreenPageLimit(1);
         mWeatherViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -77,6 +79,21 @@ public class WeatherFragment extends BaseFragment {
         }
     }
 
+    private Fragment getCurrentActiveFragment() {
+        String fragmentName = "android:switcher:" + mWeatherViewPager.getId() + ":" + mWeatherViewPager.getCurrentItem();
+        return getChildFragmentManager().findFragmentByTag(fragmentName);
+    }
+
+    public void updateWeatherAtCurrent() {
+        Fragment fragment = getCurrentActiveFragment();
+        if(fragment != null) {
+            ((WeatherOfCityFragment) fragment).loadData();
+        } else {
+            ((BaseActivity)getActivity()).showAlertDialog(getString(R.string.common_error),
+                    getString(R.string.update_error));
+        }
+    }
+
     public static class WeatherAdapter extends FragmentPagerAdapter {
         List<City> mSelectedCities;
 
@@ -87,7 +104,9 @@ public class WeatherFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return WeatherOfCityFragment.newInstance(mSelectedCities.get(position));
+            Random random = new Random();
+            final int loaderId = random.nextInt(1000);
+            return WeatherOfCityFragment.newInstance(mSelectedCities.get(position), loaderId);
         }
 
         @Override

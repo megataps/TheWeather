@@ -1,134 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ViewSwitcher
+    android:id="@+id/view_switcher"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:inAnimation="@android:anim/fade_in"
+    android:outAnimation="@android:anim/fade_out">
 
-    <TextView
-        android:id="@+id/txtCityName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/font_larger"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:textColor="@android:color/white"
-        android:text=""
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/txtTemperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/font_temperature"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginRight="@dimen/spacing_normal"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/txtCityName"
-        android:text="19°C"/>
-
-    <ImageView
-        android:id="@+id/imgWeatherIcon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@null"
-        android:layout_below="@+id/txtCityName"
-        android:layout_toRightOf="@+id/txtTemperature"
-        android:layout_marginTop="@dimen/spacing_huge"
-        android:layout_alignBottom="@+id/txtTemperature"/>
-
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/font_large"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_below="@id/txtTemperature"
-        android:textColor="@android:color/white"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:text=""/>
-
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/txtDescription"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_normal">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtCityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="center"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_normal"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:text="Humidity"/>
-            <TextView
-                android:id="@+id/txtHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_small"
-                android:textColor="@android:color/white"
-                android:text="14%"/>
-        </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:paddingLeft="@dimen/spacing_tiny"
+            android:paddingRight="@dimen/spacing_tiny"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_larger"
+            android:textStyle="bold"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center">
+            android:layout_below="@+id/txtCityName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="19°C"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_temperature"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_normal"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:text="Wind"/>
-            <TextView
-                android:id="@+id/txtWind"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_small"
-                android:textColor="@android:color/white"
-                android:text="5 k/h"/>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imgWeatherIcon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/txtTemperature"
+            android:layout_below="@+id/txtCityName"
+            android:layout_marginTop="@dimen/spacing_huge"
+            android:layout_toRightOf="@+id/txtTemperature"
+            android:background="@null"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_below="@id/txtTemperature"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"/>
 
-            <TextView
+        <FrameLayout
+            android:id="@+id/info_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDescription"
+            android:layout_above="@+id/weather_of_date_list_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_normal"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:text="Feels like"/>
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtFeelsLike"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Humidity"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/txtHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14%"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_small"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_small"
-                android:textColor="@android:color/white"
-                android:text="14%"/>
-        </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wind"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"/>
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/txtWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5 k/h"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_small"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Feels like"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/txtFeelsLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14%"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_small"/>
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <ListView
+            android:id="@+id/weather_of_date_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dip"
+            android:listSelector="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="none"
+            android:smoothScrollbar="true"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/fragment_loading_dialog" />
+</ViewSwitcher>

@@ -3,6 +3,7 @@ package com.demo.theweather.ui.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.demo.theweather.R;
 import com.demo.theweather.ui.dialog.AlertDialogFragment;
@@ -25,11 +26,17 @@ public class BaseActivity extends AppCompatActivity {
         mProgressDialogFragment = ProgressDialogFragment.newInstance(null, PROGRESS_DIALOG_FRAGMENT_ID);
     }
 
-    public void showAlertDialog(final String title, final String message) {
+    public void showAlertDialog(final String title, String message) {
+
+        if(TextUtils.isEmpty(message)) {
+            message = getString(R.string.common_error_message);
+        }
+
+        final String displayErrorMsg = message;
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(title, message, getString(R.string.common_ok));
+                AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(title, displayErrorMsg, getString(R.string.common_ok));
                 dialogFragment.show(getSupportFragmentManager(), dialogFragment.getClass().getSimpleName());
             }
         });

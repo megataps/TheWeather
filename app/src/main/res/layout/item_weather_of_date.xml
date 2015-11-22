@@ -3,33 +3,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
+    android:background="@drawable/bg_weather_of_date"
     android:descendantFocusability="blocksDescendants"
     android:paddingBottom="@dimen/spacing_normal"
-    android:paddingTop="@dimen/spacing_normal">
+    android:paddingTop="@dimen/spacing_normal"
+    android:paddingLeft="@dimen/spacing_normal"
+    android:paddingRight="@dimen/spacing_normal">
 
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/txtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="100dip"
         android:gravity="center_vertical"
-        android:lines="2"
+        android:lines="1"
+        android:text="MON"
         android:textColor="@color/white"
         android:textSize="@dimen/font_large"/>
 
-    <ImageButton
-        android:id="@+id/btnCheckbox"
+    <TextView
+        android:id="@+id/txtMaxMinTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@null"
-        android:indeterminate="true"
-        android:padding="10dip"
-        android:src="@drawable/checkbox_button"
-        />
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:text="19"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large"/>
 
 </RelativeLayout>

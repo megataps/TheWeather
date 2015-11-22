@@ -22,7 +22,9 @@ public class DefaultHttpClient {
 
     private String mErrorMessage;
 
-
+    public String getErrorMessage() {
+        return mErrorMessage;
+    }
 
     public HttpResponse get(URL uri, Map<String, List<String>> headers) {
 
@@ -33,7 +35,7 @@ public class DefaultHttpClient {
 
     private HttpResponse getOrPost(HttpRequest request) {
 
-        mErrorMessage = null;
+        mErrorMessage = "";
         HttpURLConnection conn = null;
         HttpResponse response = null;
 
@@ -69,13 +71,21 @@ public class DefaultHttpClient {
             }
 
             if (response == null) {
-                BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
-                byte[] body = IOUtils.readStream(in);
-                response = new HttpResponse(conn.getResponseCode(), conn.getHeaderFields(), body);
+
+                int status = conn.getResponseCode();
+                if (BuildConfig.DEBUG) {
+                    LogUtils.d("status:", String.valueOf(status));
+                }
+
+                if (status >= 200 && status < 300) {
+                    BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
+                    byte[] body = IOUtils.readStream(in);
+                    response = new HttpResponse(conn.getResponseCode(), conn.getHeaderFields(), body);
+                }
             }
 
             // TODO: 11/17/15: Log response headers - Should be create injectable log util
-            if (BuildConfig.DEBUG && response.getHeaders() != null) {
+            if (BuildConfig.DEBUG && response != null && response.getHeaders() != null) {
                 for (String header : response.getHeaders().keySet()) {
                     for (String value : response.getHeaders().get(header)) {
                         LogUtils.d(header, value);

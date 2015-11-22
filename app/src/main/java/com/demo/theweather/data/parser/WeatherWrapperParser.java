@@ -2,6 +2,7 @@ package com.demo.theweather.data.parser;
 
 import com.demo.common.parser.AbstractJsonParser;
 import com.demo.theweather.data.response.BaseResponse;
+import com.demo.theweather.model.Astronomy;
 import com.demo.theweather.model.CurrentCondition;
 import com.demo.theweather.model.Request;
 import com.demo.theweather.model.Weather;
@@ -22,7 +23,7 @@ public class WeatherWrapperParser extends AbstractJsonParser<BaseResponse<Weathe
     private static final String DATA_TAG = "data";
     private static final String CURRENT_CONDITION_TAG = "current_condition";
     private static final String REQUEST_TAG = "request";
-    private static final String WEATHER_TAG = "request";
+    private static final String WEATHER_TAG = "weather";
 
     @Override
     protected BaseResponse<WeatherWrapper> parse(JSONObject jsonParser) throws JSONException {
@@ -98,16 +99,37 @@ public class WeatherWrapperParser extends AbstractJsonParser<BaseResponse<Weathe
 
         List<Weather> weathers = new ArrayList<>();
 
-//        Weather weather = null;
-//        int length = weatherListJson.length();
-//        for(int i = 0; i < length; i++) {
-//            JSONObject weatherJson = weatherListJson.getJSONObject(i);
-//
-//
-//            weathers.add(weather);
-//        }
+        Weather weather = null;
+        int length = weatherListJson.length();
+        for(int i = 0; i < length; i++) {
+            JSONObject weatherJson = weatherListJson.getJSONObject(i);
+
+            weather = new Weather();
+            weather.setAstronomy(getAstronomy(getArrayObject("astronomy", weatherJson)));
+
+            weather.setDate(getString("date", weatherJson));
+            weather.setTempMaxC(getDouble("maxtempC", weatherJson));
+            weather.setTempMaxF(getDouble("maxtempF", weatherJson));
+            weather.setTempMinC(getDouble("mintempC", weatherJson));
+            weather.setTempMinF(getDouble("mintempF", weatherJson));
+
+            weathers.add(weather);
+        }
 
         return weathers;
+    }
+
+    private Astronomy getAstronomy(JSONArray astronomyListJson) throws JSONException{
+
+        JSONObject requestJson  = astronomyListJson.getJSONObject(0);
+
+        Astronomy astronomy = new Astronomy();
+        astronomy.setMoonrise(getString("moonrise", requestJson));
+        astronomy.setMoonset(getString("moonset", requestJson));
+        astronomy.setSunrise(getString("sunrise", requestJson));
+        astronomy.setSunset(getString("sunset", requestJson));
+
+        return astronomy;
     }
 
 }

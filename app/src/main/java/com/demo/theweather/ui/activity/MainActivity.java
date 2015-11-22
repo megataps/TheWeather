@@ -2,9 +2,9 @@ package com.demo.theweather.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.demo.theweather.R;
@@ -18,7 +18,9 @@ public class MainActivity extends BaseActivity {
     private Toolbar mToolbar;
 
     private TextView mTxtCity;
+    private ImageView mImgUpdate;
 
+    private WeatherFragment mWeatherFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,26 +30,17 @@ public class MainActivity extends BaseActivity {
         initUiView();
 
         if (savedInstanceState == null) {
-            Fragment fragment = WeatherFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
+            mWeatherFragment = WeatherFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mWeatherFragment).commit();
         }
     }
 
     private void initUiView() {
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
         mTxtCity = (TextView)findViewById(R.id.txtCity);
+        mImgUpdate = (ImageView)findViewById(R.id.imgUpdate);
 
         setSupportActionBar(mToolbar);
-
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
 
         mTxtCity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +48,15 @@ public class MainActivity extends BaseActivity {
                 Intent intent = new Intent(MainActivity.this, ChooseCitiesActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+
+        mImgUpdate.setVisibility(View.GONE);
+        mImgUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mWeatherFragment.updateWeatherAtCurrent();
             }
         });
     }

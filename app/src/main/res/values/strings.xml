@@ -8,6 +8,8 @@
     <string name="common.network.error">Internet Error</string>
     <string name="common.loading">Loading&#8230;</string>
     <string name="common.validator.required_field">This field is required</string>
+    <string name="common.error.message">There is an error occurred. Please try again.</string>
 
     <string name="choose.cities.empty">Please choose at least a city.</string>
+    <string name="update.error">There is an error occurred. Please try again.</string>
 </resources>
