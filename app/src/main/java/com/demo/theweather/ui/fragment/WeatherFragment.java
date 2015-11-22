@@ -81,7 +81,7 @@ public class WeatherFragment extends BaseFragment {
 
     private Fragment getCurrentActiveFragment() {
         String fragmentName = "android:switcher:" + mWeatherViewPager.getId() + ":" + mWeatherViewPager.getCurrentItem();
-        return getChildFragmentManager().findFragmentByTag(fragmentName);
+        return getFragmentManager().findFragmentByTag(fragmentName);
     }
 
     public void updateWeatherAtCurrent() {

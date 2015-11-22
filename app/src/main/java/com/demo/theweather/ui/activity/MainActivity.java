@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
         });
 
 
-        mImgUpdate.setVisibility(View.GONE);
+        mImgUpdate.setVisibility(View.VISIBLE);
         mImgUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

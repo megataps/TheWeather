@@ -15,17 +15,19 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/txtCity"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:text="City"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:textColor="@android:color/white"
+                android:paddingRight="@dimen/spacing_huge"
                 android:textSize="18sp"/>
 
             <TextView
@@ -49,7 +51,7 @@
                 android:gravity="center_vertical"
                 android:background="@null"
                 android:src="@drawable/ic_update"
-                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingLeft="@dimen/spacing_large"
                 android:paddingRight="@dimen/spacing_normal"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>

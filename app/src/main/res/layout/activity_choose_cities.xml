@@ -13,7 +13,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical">
 
             <TextView
@@ -25,6 +25,7 @@
                 android:paddingLeft="@dimen/spacing_small"
                 android:paddingRight="@dimen/spacing_small"
                 android:textColor="@android:color/white"
+                android:gravity="center_vertical"
                 android:textSize="@dimen/font_larger"
                 android:textStyle="bold"/>
 
@@ -32,9 +33,10 @@
                 android:id="@+id/txtDone"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:layout_gravity="center_vertical|right"
                 android:text="Done"
-                android:paddingLeft="@dimen/spacing_small"
+                android:paddingLeft="@dimen/spacing_large"
                 android:paddingRight="@dimen/spacing_small"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"/>
