@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+
+import com.demo.theweather.ui.activity.BaseActivity;
 
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/17/15.
@@ -26,7 +29,6 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onStop() {
-        //Always clear the handler
         mHandler.removeCallbacksAndMessages(null);
         super.onStop();
     }
@@ -38,5 +40,13 @@ public class BaseFragment extends Fragment {
      */
     protected Handler getHandler() {
         return mHandler;
+    }
+
+    protected LoaderManager getSupportLoaderManager() {
+        return getActivity().getSupportLoaderManager();
+    }
+
+    public void showProgressDialog(final boolean isShow) {
+        ((BaseActivity)mActivity).showProgressDialog(isShow);
     }
 }

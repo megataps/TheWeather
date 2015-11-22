@@ -20,7 +20,7 @@ public class CityAdapter extends BaseAdapter {
 
     private List<City> mCities;
 
-    public void setLanguages(List<City> cities) {
+    public void setCities(List<City> cities) {
         this.mCities = cities;
     }
 

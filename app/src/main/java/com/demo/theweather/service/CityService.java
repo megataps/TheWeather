@@ -1,5 +1,6 @@
 package com.demo.theweather.service;
 
+import com.demo.theweather.exception.TWException;
 import com.demo.theweather.model.City;
 
 import java.util.List;
@@ -9,6 +10,9 @@ import java.util.List;
  */
 public interface CityService {
 
-    List<City> getCityList(String name) throws Exception;
+    List<City> getCityList(String keyWord) throws TWException;
 
+    List<City> getSelectedCityList() throws TWException;
+
+    void saveSelectedCities() throws TWException;
 }

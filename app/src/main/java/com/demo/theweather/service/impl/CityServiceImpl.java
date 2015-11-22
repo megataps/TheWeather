@@ -1,6 +1,9 @@
 package com.demo.theweather.service.impl;
 
+import android.text.TextUtils;
+
 import com.demo.theweather.data.CityRepository;
+import com.demo.theweather.exception.TWException;
 import com.demo.theweather.model.City;
 import com.demo.theweather.service.CityService;
 
@@ -22,8 +25,40 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<City> getCityList(String name) throws Exception {
-        mCityListCached = mCityRepository.getCityList(name);
+    public List<City> getCityList(String keyWord) throws TWException {
+        if(mCityListCached.isEmpty()) {
+            mCityListCached = mCityRepository.getCityList(keyWord);
+        }
+
         return mCityListCached;
+    }
+
+    @Override
+    public List<City> getSelectedCityList() throws TWException {
+
+        List<City> selectedCities = new ArrayList<>();
+
+        if(!mCityListCached.isEmpty()) {
+
+            for(City city : mCityListCached) {
+                if(city.isSelected()) {
+                    selectedCities.add(city);
+                }
+            }
+        }
+
+        return selectedCities;
+    }
+
+    @Override
+    public void saveSelectedCities() throws TWException {
+        List<City> selectedCities = getSelectedCityList();
+
+        List<String> results = new ArrayList<String>();
+        for (City city : selectedCities) {
+            results.add(String.valueOf(city.getId()));
+        }
+
+        mCityRepository.saveSelectedCities(TextUtils.join(",", results));
     }
 }

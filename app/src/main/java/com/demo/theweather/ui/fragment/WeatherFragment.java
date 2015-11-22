@@ -3,18 +3,25 @@ package com.demo.theweather.ui.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.demo.theweather.R;
+import com.demo.theweather.TWApplication;
+import com.demo.theweather.model.City;
+import com.demo.theweather.util.LogUtils;
+
+import java.util.List;
 
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/18/15.
  */
 public class WeatherFragment extends BaseFragment {
+
+    private ViewPager mWeatherViewPager;
 
     public static WeatherFragment newInstance() {
         WeatherFragment fragment = new WeatherFragment();
@@ -36,13 +43,11 @@ public class WeatherFragment extends BaseFragment {
     }
 
     private void initUiView(View view) {
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.weather_view_pager);
 
-        final WeatherAdapter adapter = new WeatherAdapter(getActivity().getSupportFragmentManager(), 3);
+        mWeatherViewPager = (ViewPager) view.findViewById(R.id.weather_view_pager);
 
-        viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mWeatherViewPager.setOffscreenPageLimit(3);
+        mWeatherViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -58,38 +63,36 @@ public class WeatherFragment extends BaseFragment {
 
             }
         });
-
     }
 
     private void loadData() {
+        try {
+            final WeatherAdapter adapter =
+                    new WeatherAdapter(getActivity().getSupportFragmentManager(),
+                            TWApplication.getServiceFactory().getCityService().getSelectedCityList());
 
+            mWeatherViewPager.setAdapter(adapter);
+        } catch (Exception ex) {
+            LogUtils.printStackTrace(ex);
+        }
     }
 
-    public static class WeatherAdapter extends FragmentStatePagerAdapter {
-        int mNumOfFragments;
+    public static class WeatherAdapter extends FragmentPagerAdapter {
+        List<City> mSelectedCities;
 
-        public WeatherAdapter(FragmentManager fm, int numOfFragments) {
+        public WeatherAdapter(FragmentManager fm, List<City> selectedCities) {
             super(fm);
-            this.mNumOfFragments = numOfFragments;
+            this.mSelectedCities = selectedCities;
         }
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return WeatherOfCurrentTimeFragment.newInstance();
-                case 1:
-                    return WeatherOfDayFragment.newInstance();
-                case 2:
-                    return WeatherOfWeekFragment.newInstance();
-                default:
-                    return WeatherOfCurrentTimeFragment.newInstance();
-            }
+            return WeatherOfCityFragment.newInstance(mSelectedCities.get(position));
         }
 
         @Override
         public int getCount() {
-            return mNumOfFragments;
+            return mSelectedCities == null ? 0 : mSelectedCities.size();
         }
     }
 }

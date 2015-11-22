@@ -1,5 +1,6 @@
 package com.demo.theweather.service.impl;
 
+import com.demo.theweather.TWApplication;
 import com.demo.theweather.data.impl.CityRepositoryImpl;
 import com.demo.theweather.data.impl.WeatherRepositoryImpl;
 import com.demo.theweather.service.CityService;
@@ -15,7 +16,7 @@ public class DefaultServiceFactory implements ServiceFactory {
     private WeatherService mWeatherService;
 
     public DefaultServiceFactory() {
-        mCityService = new CityServiceImpl(new CityRepositoryImpl());
+        mCityService = new CityServiceImpl(new CityRepositoryImpl(TWApplication.getContext()));
         mWeatherService = new WeatherServiceImpl(new WeatherRepositoryImpl());
     }
 

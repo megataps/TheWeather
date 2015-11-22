@@ -1,4 +1,4 @@
-package com.demo.network;
+package com.demo.common.network;
 
 import java.util.List;
 import java.util.Map;

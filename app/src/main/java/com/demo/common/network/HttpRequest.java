@@ -1,4 +1,4 @@
-package com.demo.network;
+package com.demo.common.network;
 
 import java.net.URL;
 import java.util.List;
@@ -7,12 +7,12 @@ import java.util.Map;
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/17/15.
  */
-public class Request {
+public class HttpRequest {
 
     private URL mUrl;
     private Map<String, List<String>> mHeaders;
 
-    public Request(URL uri, Map<String, List<String>> headers) {
+    public HttpRequest(URL uri, Map<String, List<String>> headers) {
         this.mUrl = uri; this.mHeaders = headers;
     }
 

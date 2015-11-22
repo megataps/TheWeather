@@ -1,8 +1,9 @@
-package com.demo.network.util;
+package com.demo.common.network.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/17/15.
@@ -22,6 +23,10 @@ public class IOUtils {
         }
 
         return out.toByteArray();
+    }
+
+    public static String bytesToString(byte []data) {
+        return new String(data, StandardCharsets.UTF_8);
     }
 
 }

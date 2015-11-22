@@ -1,4 +1,4 @@
-package com.demo.network;
+package com.demo.common.network;
 
 import java.net.URL;
 import java.util.List;
@@ -7,11 +7,11 @@ import java.util.Map;
 /**
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/17/15.
  */
-public class PostRequest extends Request {
+public class HttpPostRequest extends HttpRequest {
 
     private byte[] mBodyData;
 
-    public PostRequest(URL uri, Map<String, List<String>> headers, byte[] bodyData) {
+    public HttpPostRequest(URL uri, Map<String, List<String>> headers, byte[] bodyData) {
         super(uri, headers);
         this.mBodyData = bodyData;
     }

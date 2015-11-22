@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/txtCityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_larger"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:textColor="@android:color/white"
+        android:text=""
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/txtTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_temperature"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/txtCityName"
+        android:text="19°C"/>
+
+    <ImageView
+        android:id="@+id/imgWeatherIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@null"
+        android:layout_below="@+id/txtCityName"
+        android:layout_toRightOf="@+id/txtTemperature"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:layout_alignBottom="@+id/txtTemperature"/>
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_large"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_below="@id/txtTemperature"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text=""/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/txtDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_normal"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:text="Humidity"/>
+            <TextView
+                android:id="@+id/txtHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_small"
+                android:textColor="@android:color/white"
+                android:text="14%"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_normal"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:text="Wind"/>
+            <TextView
+                android:id="@+id/txtWind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_small"
+                android:textColor="@android:color/white"
+                android:text="5 k/h"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_normal"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:text="Feels like"/>
+
+            <TextView
+                android:id="@+id/txtFeelsLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_small"
+                android:textColor="@android:color/white"
+                android:text="14%"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

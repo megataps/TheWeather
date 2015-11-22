@@ -8,15 +8,25 @@ import android.os.Parcelable;
  */
 public class City implements Parcelable {
 
+    private int mId;
     private String mName;
     private boolean mIsSelected;
 
     public City() {
     }
 
-    public City(String name, boolean isSelected) {
+    public City(int id, String name, boolean isSelected) {
+        mId = id;
         mName = name;
         mIsSelected = isSelected;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
     }
 
     public String getName() {
@@ -42,11 +52,13 @@ public class City implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.mId);
         dest.writeString(this.mName);
         dest.writeByte(mIsSelected ? (byte) 1 : (byte) 0);
     }
 
     protected City(Parcel in) {
+        this.mId = in.readInt();
         this.mName = in.readString();
         this.mIsSelected = in.readByte() != 0;
     }

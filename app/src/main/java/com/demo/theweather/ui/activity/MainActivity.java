@@ -1,60 +1,60 @@
 package com.demo.theweather.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.demo.theweather.R;
-import com.demo.theweather.loader.SearchCityLoader;
-import com.demo.theweather.model.City;
 import com.demo.theweather.ui.fragment.WeatherFragment;
-
-import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getName();
+
+
+    private Toolbar mToolbar;
+
+    private TextView mTxtCity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initUiView();
+
         if (savedInstanceState == null) {
-//            Fragment fragment = CityListFragment.newInstance();
             Fragment fragment = WeatherFragment.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
-
-        //        loadCityList("HaNoi");
     }
 
-    private void loadCityList(final String cityName) {
-        Log.e(TAG, "loadCityList");
+    private void initUiView() {
+        mToolbar = (Toolbar)findViewById(R.id.toolbar);
+        mTxtCity = (TextView)findViewById(R.id.txtCity);
 
-        getSupportLoaderManager().initLoader(111, null, new LoaderManager.LoaderCallbacks<List<City>>() {
+        setSupportActionBar(mToolbar);
+
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
+
+        mTxtCity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public Loader<List<City>> onCreateLoader(final int id, final Bundle args) {
-//                showProgressbar(true);
-                return new SearchCityLoader(MainActivity.this, cityName);
-            }
-
-            @Override
-            public void onLoadFinished(final Loader<List<City>> loader, final List<City> cityList) {
-//                showProgressbar(false);
-
-//                if (cityList != null) {
-//
-//                }
-
-                getSupportLoaderManager().destroyLoader(111);
-            }
-
-            @Override
-            public void onLoaderReset(final Loader<List<City>> loader) {
-                // Do nothing
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChooseCitiesActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
