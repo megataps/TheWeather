@@ -8,6 +8,9 @@ import com.demo.theweather.service.ServiceFactory;
 import com.demo.theweather.service.WeatherService;
 
 /**
+ * This class is responsible for init object of Service and Data Repository layer. It likes DI container for wiring
+ * object. This class is called in Application class as application start.
+ *
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/16/15.
  */
 public class DefaultServiceFactory implements ServiceFactory {

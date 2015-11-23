@@ -8,4 +8,8 @@ public class TemperatureUtils {
     public static String format(double temperature) {
         return String.valueOf(Math.round(temperature)) + "°";
     }
+
+    public static String format(String temperature) {
+        return temperature + "°";
+    }
 }

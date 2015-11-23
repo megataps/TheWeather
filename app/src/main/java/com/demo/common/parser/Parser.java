@@ -8,6 +8,7 @@ import org.json.JSONException;
 public interface Parser<T> {
 
     void parse(byte[] data) throws JSONException;
+    void parse(String data) throws JSONException;
 
     T getResult();
 }

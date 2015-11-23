@@ -16,4 +16,8 @@
     <string name="humidity">Humidity</string>
     <string name="wind">Wind</string>
     <string name="feels_like">Feels like</string>
+
+    <string name="temperature_c_unit">C</string>
+    <string name="degree_unit">%</string>
+    <string name="wind_unit">km/h</string>
 </resources>

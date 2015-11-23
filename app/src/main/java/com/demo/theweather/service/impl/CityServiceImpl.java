@@ -2,6 +2,7 @@ package com.demo.theweather.service.impl;
 
 import android.text.TextUtils;
 
+import com.demo.theweather.AppConfigs;
 import com.demo.theweather.data.CityRepository;
 import com.demo.theweather.exception.TWException;
 import com.demo.theweather.model.City;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class is responsible for get City list and handle business rules relative city
+ *
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/16/15.
  */
 public class CityServiceImpl implements CityService {
@@ -59,6 +62,6 @@ public class CityServiceImpl implements CityService {
             results.add(String.valueOf(city.getId()));
         }
 
-        mCityRepository.saveSelectedCities(TextUtils.join(",", results));
+        mCityRepository.saveSelectedCities(TextUtils.join(AppConfigs.SEPARATOR_CHARACTER, results));
     }
 }

@@ -108,8 +108,6 @@ public class WeatherOfCityFragment extends BaseFragment {
     public void loadData() {
 
         if(!NetworkUtils.isNetworkAvailable(getActivity())) {
-//            ((BaseActivity) getActivity()).showAlertDialog(getString(R.string.common_error), getString(R.string.common_network_error));
-
             if(mWeatherWrapper == null) {
                 mErrorLayout.setVisibility(View.VISIBLE);
             } else {
@@ -123,11 +121,13 @@ public class WeatherOfCityFragment extends BaseFragment {
     }
 
     private void updateUiWitCurrentCondition(CurrentCondition currentCondition) {
-        mTxtTemperature.setText(TemperatureUtils.format(currentCondition.getTempC()) + "C");
+        mTxtTemperature.setText(String.format("%s%s", TemperatureUtils.format(currentCondition.getTempC()), getString
+                (R.string.temperature_c_unit)));
         mTxtDescription.setText(currentCondition.getWeatherDesc());
-        mTxtHumidity.setText(currentCondition.getHumidity() + "%");
-        mTxtWind.setText(currentCondition.getWindspeedKmph() + " km/h");
-        mTxtFeelsLike.setText(currentCondition.getFeelsLikeC() + "°C");
+        mTxtHumidity.setText(String.format("%s%s",currentCondition.getHumidity(),  getString(R.string.degree_unit)));
+        mTxtWind.setText(String.format("%s%s",currentCondition.getWindspeedKmph(), getString(R.string.wind_unit)));
+        mTxtFeelsLike.setText(String.format("%s%s", TemperatureUtils.format(currentCondition.getFeelsLikeC()), getString
+                (R.string.temperature_c_unit)));
 
         mImgWeatherIcon.setTag(currentCondition.getWeatherIconUrl());
         ImageLoader.getInstance(getActivity()).displayImage(currentCondition.getWeatherIconUrl(),

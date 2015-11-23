@@ -1,0 +1,59 @@
+{
+  "cities": [
+    {
+      "id":1,
+      "name":"Ha Noi",
+      "isSelected": false
+    },
+    {
+      "id":2,
+      "name":"Hai Phong",
+      "isSelected": false
+    },
+    {
+      "id":3,
+      "name":"Ho Chi Minh",
+      "isSelected": false
+    },
+    {
+      "id":4,
+      "name":"Da Nang",
+      "isSelected": false
+    },
+    {
+      "id":5,
+      "name":"Can Tho",
+      "isSelected": false
+    },
+    {
+      "id":6,
+      "name":"Nha Trang",
+      "isSelected": false
+    },
+    {
+      "id":7,
+      "name":"New York",
+      "isSelected": false
+    },
+    {
+      "id":8,
+      "name":"Paris",
+      "isSelected": false
+    },
+    {
+      "id":9,
+      "name":"London",
+      "isSelected": false
+    },
+    {
+      "id":10,
+      "name":"Tokyo",
+      "isSelected": false
+    },
+    {
+      "id":11,
+      "name":"BangKok",
+      "isSelected": false
+    }
+  ]
+}

@@ -1,6 +1,9 @@
 package com.demo.theweather;
 
 /**
+ *
+ * This class contain Constant value in app
+ *
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/16/15.
  */
 public class AppConfigs {
@@ -16,4 +19,6 @@ public class AppConfigs {
     public static final int CITY_LOADER_ID = 2;
 
     public static final String CACHED_CITY_LIST_KEY = "cached_city_list_key";
+    public static final String SEPARATOR_CHARACTER = ",";
+    public static final String CITY_FILE_NAME = "cities.json";
 }

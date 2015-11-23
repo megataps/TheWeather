@@ -18,6 +18,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
+ * This class is responsible for get weather of city from web service
+ *
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/17/15.
  */
 public class WeatherRepositoryImpl implements WeatherRepository {

@@ -21,6 +21,13 @@ public abstract class AbstractJsonParser<T> implements Parser<T> {
     }
 
     @Override
+    public void parse(String data) throws JSONException{
+        JSONObject jObj = new JSONObject(data);
+
+        mResult = parse(jObj);
+    }
+
+    @Override
     public T getResult() {
         return mResult;
     }
@@ -59,4 +66,13 @@ public abstract class AbstractJsonParser<T> implements Parser<T> {
 
         return 0;
     }
+
+    protected boolean  getBoolean(String tagName, JSONObject jObj) throws JSONException {
+        if(jObj.has(tagName)) {
+            return jObj.getBoolean(tagName);
+        }
+
+        return false;
+    }
+
 }

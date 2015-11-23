@@ -7,6 +7,8 @@ import com.demo.theweather.service.WeatherService;
 import com.demo.theweather.service.request.WeatherParams;
 
 /**
+ *  This class is responsible for get weather of city  and handle business rules relative weather
+ *
  * Created by Jackie Nguyen <nguyenngoc100@gmail.com> on 11/17/15.
  */
 public class WeatherServiceImpl implements WeatherService {
