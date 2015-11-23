@@ -75,8 +75,6 @@ public class WeatherOfCityFragment extends BaseFragment {
 
         initUiView(view);
 
-        loadData();
-
         return view;
     }
 
@@ -98,6 +96,13 @@ public class WeatherOfCityFragment extends BaseFragment {
         mWeahterOfDateListView = (ListView) view.findViewById(R.id.weather_of_date_list_view);
         mWeatherOfDateAdapter = new WeatherOfDateAdapter();
         mWeahterOfDateListView.setAdapter(mWeatherOfDateAdapter);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        loadData();
     }
 
     public void loadData() {

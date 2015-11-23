@@ -39,14 +39,19 @@ public class WeatherFragment extends BaseFragment {
 
         initUiView(view);
 
-        loadData();
-
         return view;
     }
 
     private void initUiView(View view) {
         mWeatherViewPager = (ViewPager) view.findViewById(R.id.weather_view_pager);
         mWeatherViewPager.setOffscreenPageLimit(2);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        loadData();
     }
 
     private void loadData() {
