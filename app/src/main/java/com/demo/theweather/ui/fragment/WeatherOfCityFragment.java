@@ -112,6 +112,8 @@ public class WeatherOfCityFragment extends BaseFragment {
 
             if(mWeatherWrapper == null) {
                 mErrorLayout.setVisibility(View.VISIBLE);
+            } else {
+                updateUiView(mWeatherWrapper);
             }
 
             return;
@@ -120,7 +122,7 @@ public class WeatherOfCityFragment extends BaseFragment {
         loadWeatherOfCity(mCity.getName());
     }
 
-    private void updateUi(CurrentCondition currentCondition) {
+    private void updateUiWitCurrentCondition(CurrentCondition currentCondition) {
         mTxtTemperature.setText(TemperatureUtils.format(currentCondition.getTempC()) + "C");
         mTxtDescription.setText(currentCondition.getWeatherDesc());
         mTxtHumidity.setText(currentCondition.getHumidity() + "%");
@@ -135,6 +137,20 @@ public class WeatherOfCityFragment extends BaseFragment {
     private void updateWeatherOfDate(List<Weather> weathers) {
         mWeatherOfDateAdapter.setWeathers(weathers);
         mWeatherOfDateAdapter.notifyDataSetChanged();
+    }
+
+    private void updateUiView(WeatherWrapper weatherWrapper) {
+        mErrorLayout.setVisibility(View.GONE);
+        mWeatherWrapper = weatherWrapper;
+
+        mTxtCityName.setText(weatherWrapper.getRequest().getQuery());
+
+        List<CurrentCondition> currentConditions = weatherWrapper.getCurrentConditions();
+        if(currentConditions != null && !currentConditions.isEmpty()) {
+            updateUiWitCurrentCondition(currentConditions.get(0));
+        }
+
+        updateWeatherOfDate(weatherWrapper.getWeathers());
     }
 
     private void loadWeatherOfCity(final String cityName) {
@@ -155,24 +171,13 @@ public class WeatherOfCityFragment extends BaseFragment {
 
                 final Exception exception = ((ExceptionAwareLoader) loader).getException();
                 if (exception != null) {
-
                     mErrorLayout.setVisibility(View.VISIBLE);
                     ((BaseActivity)getActivity()).showAlertDialog(getString(R.string.common_error),
                             exception.getMessage());
                     return;
                 }
 
-                mErrorLayout.setVisibility(View.GONE);
-                mWeatherWrapper = weatherWrapper;
-
-                mTxtCityName.setText(weatherWrapper.getRequest().getQuery());
-
-                List<CurrentCondition> currentConditions = weatherWrapper.getCurrentConditions();
-                if(currentConditions != null && !currentConditions.isEmpty()) {
-                    updateUi(currentConditions.get(0));
-                }
-
-                updateWeatherOfDate(weatherWrapper.getWeathers());
+                updateUiView(weatherWrapper);
 
 //                getSupportLoaderManager().destroyLoader(loaderId);
             }
